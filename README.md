@@ -116,39 +116,7 @@ void writeDataToProperties() {
 
 提供文本的加密解密功能
 
-```c++
-string enCode(string key) {
-	string result;
-	for (int i = 0; i < key.size(); i++) {
-		if (key[i] >= 'A' && key[i] <= 'Z') {
-			result += char((key[i] + 15 - 65) % 26 + 65);
-		} else if (key[i] >= 'a' && key[i] <= 'z') {
-			result += char((key[i] + 15 - 97) % 26 + 97);
-		} else if (key[i] >= '0' && key[i] <= '9') {
-			result += char((key[i] + 15 - 48) % 26 + 48);
-		} else {
-			result = "非法密码";
-		}
-	}
-	return result;
-}
-
-string deCode(string key) {
-	string result;
-	for (int i = 0; i < key.size(); i++) {
-		if (key[i] >= 'A' && key[i] <= 'Z') {
-			result += char((((key[i] - 65) + 26) - 15) % 26 + 65);
-		} else if (key[i] >= 'a' && key[i] <= 'z') {
-			result += char((((key[i] - 97) + 26) - 15) % 26 + 97);
-		} else if (key[i] >= '0' && key[i] <= '9') {
-			result += char((((key[i] - 48) + 26) - 15) % 26 + 48);
-		} else {
-			result = "非法密码" ;
-		}
-	}
-	return result;
-}
-```
+调用md5验证
 
 
 
