@@ -116,7 +116,39 @@ void writeDataToProperties() {
 
 提供文本的加密解密功能
 
-调用md5验证
+```c++
+string enCode(string key) {
+	string result;
+	for (int i = 0; i < key.size(); i++) {
+		if (key[i] >= 'A' && key[i] <= 'Z') {
+			result += char((key[i] + 15 - 65) % 26 + 65);
+		} else if (key[i] >= 'a' && key[i] <= 'z') {
+			result += char((key[i] + 15 - 97) % 26 + 97);
+		} else if (key[i] >= '0' && key[i] <= '9') {
+			result += char((key[i] + 15 - 48) % 26 + 48);
+		} else {
+			result = "非法密码";
+		}
+	}
+	return result;
+}
+
+string deCode(string key) {
+	string result;
+	for (int i = 0; i < key.size(); i++) {
+		if (key[i] >= 'A' && key[i] <= 'Z') {
+			result += char((((key[i] - 65) + 26) - 15) % 26 + 65);
+		} else if (key[i] >= 'a' && key[i] <= 'z') {
+			result += char((((key[i] - 97) + 26) - 15) % 26 + 97);
+		} else if (key[i] >= '0' && key[i] <= '9') {
+			result += char((((key[i] - 48) + 26) - 15) % 26 + 48);
+		} else {
+			result = "非法密码" ;
+		}
+	}
+	return result;
+}
+```
 
 
 
@@ -172,7 +204,7 @@ vector<Books> books;
 
 ​	vector<Books>& getBooks();
 
-![](C:\Users\Mai\Desktop\图书管理系统\image\LibraryImpl.png)
+![](image\LibraryImpl.png)
 
 ## Readers类
 
@@ -180,13 +212,13 @@ vector<Books> books;
 
 功能与LibraryImpl类似，自行查阅源码
 
-![](C:\Users\Mai\Desktop\图书管理系统\image\Readers.png)
+![](image\Readers.png)
 
 ## Record类
 
 **记录类**，提供简单的get方法和toString方法,每次创建该对象，都会自动给其date属性设置当前时间
 
-![](C:\Users\Mai\Desktop\图书管理系统\image\Record.png)
+![](image\Record.png)
 
 ## Books类
 
@@ -204,10 +236,7 @@ string toString() 将id name tel拼接成字符串后返回
 
 
 
-
-
-
-
 ## Vector容器的基本使用
 
 ![](image\Vector容器的基本使用.png)
+

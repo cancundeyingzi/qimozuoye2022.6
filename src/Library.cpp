@@ -69,9 +69,9 @@ void Library::selectAll() {
 		cout << "没有图书记录" << endl;
 		return;
 	}
-	printf("%-10s%-10s%-15s%-15s%10s\n", "行号", "书号", "书名", "类型", "是否被借阅");
+	printf("%-10s%-30s%-15s%10s\n", "书号", "书名", "类型", "是否被借阅");
 	for (int i = 0; i < books.size(); i++) {
-		printf("%-10d%-10s%-15s%-15s", i, books[i].getId().c_str(), books[i].getName().c_str(),
+		printf("%-10s%-30s%-15s",  books[i].getId().c_str(), books[i].getName().c_str(),
 		       books[i].getItem().c_str() );
 		if (books[i].getFlag()) {
 			cout << "否" << endl;
@@ -80,6 +80,10 @@ void Library::selectAll() {
 		}
 	}
 	cout << "=========================================================================" << endl;
+}
+
+int Library::getTotal() {
+	return books.size();
 }
 
 vector<Books> &Library::getBooks() {

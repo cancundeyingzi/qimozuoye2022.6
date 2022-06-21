@@ -7,12 +7,12 @@ WINDRES  = windres.exe
 OBJ      = main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o md5.o
 LINKOBJ  = main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o md5.o
 CLEANOBJ  =  main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o md5.o Library_system.exe
-LIBS     = 
+LIBS     =  -s
 INCS     =  
 CXXINCS  =  
 BIN      = Library_system.exe
-CXXFLAGS = $(CXXINCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
-CFLAGS   = $(INCS)  -g3 -pipe -Wall -Wextra -D__DEBUG__
+CXXFLAGS = $(CXXINCS)  -O2 -pipe
+CFLAGS   = $(INCS)  -O2 -pipe
 RM       = del /q /f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -25,29 +25,29 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-main.o: main.cpp Management.h Base.h reader.h Record.h Books.h Library.h Readers.h
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/main.cpp" -o main.o $(CXXFLAGS) 
+main.o: main.cpp Books.h Library.h Record.h Base.h Management.h Readers.h reader.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/main.cpp" -o main.o $(CXXFLAGS) 
 
 Record.o: Record.cpp Base.h Record.h
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/Record.cpp" -o Record.o $(CXXFLAGS) 
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/Record.cpp" -o Record.o $(CXXFLAGS) 
 
 Base.o: Base.cpp Base.h
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/Base.cpp" -o Base.o $(CXXFLAGS) 
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/Base.cpp" -o Base.o $(CXXFLAGS) 
 
 Books.o: Books.cpp Base.h Books.h
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/Books.cpp" -o Books.o $(CXXFLAGS) 
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/Books.cpp" -o Books.o $(CXXFLAGS) 
 
-Library.o: Library.cpp Management.h Base.h Books.h Library.h
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/Library.cpp" -o Library.o $(CXXFLAGS) 
+Library.o: Library.cpp Books.h Library.h Base.h Management.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/Library.cpp" -o Library.o $(CXXFLAGS) 
 
 Management.o: Management.cpp
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/Management.cpp" -o Management.o $(CXXFLAGS) 
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/Management.cpp" -o Management.o $(CXXFLAGS) 
 
-Readers.o: Readers.cpp Management.h Base.h reader.h Books.h Readers.h
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/Readers.cpp" -o Readers.o $(CXXFLAGS) 
+Readers.o: Readers.cpp Books.h Base.h Management.h Readers.h reader.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/Readers.cpp" -o Readers.o $(CXXFLAGS) 
 
 reader.o: reader.cpp Base.h reader.h
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/reader.cpp" -o reader.o $(CXXFLAGS) 
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/reader.cpp" -o reader.o $(CXXFLAGS) 
 
 md5.o: md5.cpp
-	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/基本/src/md5.cpp" -o md5.o $(CXXFLAGS)  -finput-charset=UTF-8 -fexec-charset=gbk
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/src/md5.cpp" -o md5.o $(CXXFLAGS) 

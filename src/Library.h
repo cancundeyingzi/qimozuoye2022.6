@@ -24,6 +24,8 @@ class Library : public Management {
 		Base *selectById(string id);
 		//查询所有 已完成
 		void selectAll();
+		//返回总数
+		int getTotal();
 		vector<Books> &getBooks();
 		~Library();
 };
