@@ -28,6 +28,10 @@ bool reader::check(string pwd) {
 	return pwd == password;
 }
 
+void reader::setPwd(string pwd) {
+	this->password = pwd;
+}
+
 string reader::getPassword() {
 	return password;
 }

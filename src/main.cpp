@@ -68,7 +68,7 @@ void registerUser() {
 	for (int i = 0; i < 5 - n; i++) {
 		id = "0" + id;
 	}
-	reader r(id, name, tel, pwd);
+	reader r(id, name, tel, enCode(pwd));
 	R.add(&r);
 	cout << "[提示]注册成功，请牢记你的学号：" << r.getId() << endl;
 }
@@ -119,10 +119,14 @@ void Login() {
 				cout << "请输入密码:";
 				cin >> pwd;
 				reader *user = (reader *)R.selectById(id);
-				if (user->check(pwd)) {
-					record(*user);
+				if (user != NULL) {
+					if (user->check(enCode(pwd))) {
+						record(*user);
+					} else {
+						cout << "登陆失败" << endl;
+					}
 				} else {
-					cout << "登陆失败" << endl;
+					cout << "学号不存在,请重新输入" << endl;
 				}
 			}
 			break;
@@ -168,11 +172,12 @@ void readDataFromProperties() {
 	ifstream inf_book("config\\library.dat", ios::in);
 	ifstream inf_reader("config\\readers.dat", ios::in);
 	fstream inf("config\\key.dat");
+	ifstream inf_record("config\\records.dat", ios::in);
 	//创建容器
 	cout << "[提示]容器已创建......" << endl;
 	vector<Books> book;
 	vector<reader> readers;
-	int bookNum = 0, readerNum = 0;
+	int bookNum = 0, readerNum = 0, recordNum = 0;
 	//文件异常处理
 
 	if (inf) {
@@ -181,7 +186,7 @@ void readDataFromProperties() {
 		cout << "[警告]文件:config\\key.dat不存在" << endl;
 	}
 	if (!inf_book) {
-		cout << "[警告]文件:config\\library.dat不存在" << endl;;
+		cout << "[警告]文件:config\\library.dat不存在" << endl;
 	} else {
 		while (!inf_book.eof()) {
 			string str;
@@ -222,6 +227,25 @@ void readDataFromProperties() {
 		}
 		R.setReaders(readers);
 	}
+	if (!inf_record) {
+		cout << "[警告]文件:config\\records.dat不存在" << endl;;
+	} else {
+		string str;
+		while (getline(inf_record, str)) {
+			string s[6];
+			for (int i = 0, j = 0; i < str.size(); i++) {
+				if (str[i] == ',') {
+					j++;
+				} else {
+					s[j] += str[i];
+				}
+			}
+			if (s[0] != "" && s[1] != "" && s[2] != "" ) {
+				records.push_back(Record(s[0], s[1], s[2], s[3],  s[5] == "f" ? false : true, s[4]));
+				recordNum++;
+			}
+		}
+	}
 	cout << "[提示]共读取书籍记录" << bookNum << "条" << ",";
 	cout << "读者记录" << readerNum << "条" << endl;
 	L.selectAll();
@@ -242,6 +266,7 @@ void writeDataToProperties() {
 	ofstream outf_book("config\\library.dat", ios:: out);
 	ofstream outf_reader("config\\readers.dat", ios:: out );
 	ofstream outf_key("config\\key.dat", ios::out);
+	ofstream outf_record("config\\records.dat", ios::out);
 	//将数据保存到string一并写入
 	string val = "";
 	for (int i = 0; i < book.size(); i++) {
@@ -253,11 +278,19 @@ void writeDataToProperties() {
 		val += readers[i].toString().c_str();
 	}
 	outf_reader << val;
+
+	val = "";
+	for (int i = 0; i < records.size(); i++) {
+		val += records[i].Out();
+	}
+	outf_record << val;
 	//保存密码
 	if (password != "") {
 		//加密
 		outf_key << password.c_str();
 	}
+
+	outf_record.close();
 	outf_reader.close();
 	outf_book.close();
 	outf_key.close();
@@ -488,6 +521,61 @@ void readerManagment() {
 
 //借阅登记模块
 void record(reader &user) {
-	cout << user.toString();
-}
+	cout << "测试" << endl;
+	string id;
+	while (1) {
+		cout << "请选择您的操作 1.借书 2.还书 3.查看当前借阅情况 4.修改密码 5.退出登入" << endl;
+		string t;
+		cin >> t;
+		if (t == "1") {
+			Books *book ;
+			cout << "当前图书馆图书如下：" << endl;
+			L.selectAll();
+			cout << "是否有您想要借阅的图书(y/n)" << endl;
+			string s;
+			cin >> s;
+			if (s == "y") {
+				do {
+					cout << "请输入你想借的书的ID:";
+					cin >> id;
+					book = (Books *)L.selectById(id);
+					if (book == NULL ) {
+						cout << "不存在这本书,请重新查询" << endl;
+					} else {
+						book->setReaderId(user.getId());
+						book->setFlag(true);
+						L.modify(book);
+						cout << "借书成功" << endl;
+						Record J(book->getReaderId(), book->getName(), user.getId(), user.getName(), false); //借书
+						J.toString();
+						records.push_back(J);
+						writeDataToProperties();
+						break;
 
+					}
+				} while (1);
+
+				//这边写保存代码
+			}
+		} else if (t == "2") {
+//   } else {
+//    cout << "请输入您要归还的书名:" << endl;
+//    string bookName;
+//    cin >> bookName;
+//    if {
+//     cout << "还书成功" << endl;
+//    } else {
+//     cout << "您并未借阅此书" << endl;
+//    }
+//   }
+		} else if (t == "3") {
+		}  else if (t == "4") {
+			cout << "退出成功" << endl;
+			break;
+		} else {
+			cout << "暂无此操作，请按提示操作" << endl;
+		}
+	}
+
+	getchar();
+}

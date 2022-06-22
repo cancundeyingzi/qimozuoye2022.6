@@ -15,13 +15,14 @@ class Record : public Base {
 		bool action;
 	public:
 		Record();
-		Record( string bookId, string bookName, string readerId, string readerName,  bool action);
+		Record( string bookId, string bookName, string readerId, string readerName,  bool action, string cur_date = "");
 
 		string getBookName();
 		string getBookId();
 		string getReaderName();
 		string getReaderId();
 		string getDate();
+		string Out();
 		bool getAction();
 		void toString();
 	protected:

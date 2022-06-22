@@ -12,6 +12,7 @@ void Books::setFlag(bool flag) {
 	this->flag = flag;
 }
 
+
 string Books::getName() {
 	return Base::getName();
 }

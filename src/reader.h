@@ -21,6 +21,7 @@ class reader: public Base {
 		string getTel();
 		string toString();
 		string getPassword();
+		void setPwd(string pwd);
 		bool check(string pwd);
 		~reader();
 };
