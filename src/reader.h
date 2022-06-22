@@ -13,8 +13,9 @@ class reader: public Base {
 
 	public:
 		reader();
-		reader(string id, string name, string tel, string pwd);
-
+		reader(string id, string name, string tel, string pwd, bool del = false);
+		void setDel(bool state);
+		bool getDel();
 		string getName();
 		string getId();
 		string getTel();

@@ -10,11 +10,14 @@ class Readers: public Management {
 	public:
 		vector<reader> &getReaders();
 		void setReaders(vector<reader> &readers);
+
+
 		bool add(Base *b);
 		bool remove(string id);
 		bool modify(Base *b);
 		Base *selectById(string id);
 		void selectAll();
+
 		int getTotal();
 
 };

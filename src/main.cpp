@@ -5,29 +5,53 @@
 #include "Books.h"
 #include "Record.h"
 using namespace std;
-void Login();
-void writeDataToProperties();
-void readDataFromProperties();
-void init();
-void bookManagment();
-void readerManagment();
-string enCode(string key);
+void Login();//登录模块
+void writeDataToProperties();//写入模块
+void readDataFromProperties();//读取模块
+void init();//初始化
+void administrators();//管理者
+void bookManagment();//图书管理模块
+void readerManagment();//读者管理模块
+void record(reader &user);//借书还书模块
+string enCode(string key);//MD5加密
 Library L;//图书管理类
-Readers R;
+Readers R;//读者管理类
 vector<Record> records;//借书还书记录
-void record(reader &user);
 string password = ""; //管理员密码
-void administrators();
 
-int main() {
-	string key="hello";
-	cout<<enCode(key);
+void toContinue() {
+	cout << "按任意键继续";
+	getchar();
+	system("cls");
 }
 
-//初始化，调试模拟数据
+int main() {
+	init();
+}
+
+//初始化-必须
 void init() {
+	//读取数据
 	readDataFromProperties();
-	bookManagment();
+	toContinue();
+	Login();
+}
+
+int input() {
+	int select;
+	cin >> select;
+	while (cin.fail()) { //如果输入类型和定义类型不一致为true
+		if (cin.fail()) {
+			cout << "输入选项不合法！！！" << endl;
+			cin.clear();
+			cout << "请重新输入" << endl;
+			while (cin.get() != '\n') {
+				continue;
+			}
+			cin >> select;
+		}
+	}
+	return select;
 }
 
 void registerUser() {
@@ -46,7 +70,7 @@ void registerUser() {
 	}
 	reader r(id, name, tel, pwd);
 	R.add(&r);
-	cout << "注册成功，请牢记你的学号：" << r.getId() << endl;
+	cout << "[提示]注册成功，请牢记你的学号：" << r.getId() << endl;
 }
 
 /**
@@ -59,12 +83,15 @@ void registerUser() {
 **/
 void Login() {
 	while (1) {
-		cout << "===============================" << endl;
-		cout << "||" << "\t\t图书馆管理系统" << endl;
-		cout << "===============================" << endl;
-		cout << "请选择你的身份 1-管理员 2-用户 3-注册用户 0-退出" << endl;
+		cout << "____________________________________________________" << endl;
+		cout << "||================================================||" << endl;
+		cout << "||" << "\t\t    图书馆管理系统" << "\t\t  ||" << endl;
+		cout << "||------------------------------------------------||" << endl;
+		cout << "||请选择你的身份 1-管理员 2-用户 3-注册用户 0-退出||" << endl;
+		cout << "||================================================||" << endl;
+		cout << "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣" << endl;
 		int select;
-		cin >> select;
+		select = input();
 		switch (select) {
 			case 0:
 				return;
@@ -110,13 +137,17 @@ void Login() {
 }
 
 void administrators() {
-	cout << "===============================" << endl;
-	cout << "欢迎进入管理员系统" << endl;
-	cout << "1-图书管理\t2-读者管理\t0-退出" << endl;
-	cout << "===============================" << endl;
+
 	while (1) {
-		int select;
-		cin>>select;
+		system("cls");
+		cout << "____________________________________________________" << endl;
+		cout << "||================================================||" << endl;
+		cout << "||" << "\t\t 欢迎进入管理员系统" << "\t\t  ||" << endl;
+		cout << "||------------------------------------------------||" << endl;
+		cout << "||" << "\t1-图书管理\t2-读者管理\t0-退出" << "\t  ||" << endl;
+		cout << "||================================================||" << endl;
+		cout << "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣" << endl;
+		int select = input();
 		switch (select) {
 			case 0:
 				return;
@@ -132,28 +163,30 @@ void administrators() {
 
 //初始化读取数据
 void readDataFromProperties() {
-	cout << "开始读取" << endl;
+	cout << "[提示]程序初始化......" << endl;
 	//创建流对象
 	ifstream inf_book("config\\library.dat", ios::in);
 	ifstream inf_reader("config\\readers.dat", ios::in);
 	fstream inf("config\\key.dat");
 	//创建容器
+	cout << "[提示]容器已创建......" << endl;
 	vector<Books> book;
 	vector<reader> readers;
+	int bookNum = 0, readerNum = 0;
 	//文件异常处理
 
 	if (inf) {
 		inf >> password;
 	} else {
-		cout << "文件:config\\key.dat不存在" << endl;
+		cout << "[警告]文件:config\\key.dat不存在" << endl;
 	}
 	if (!inf_book) {
-		cout << "文件:config\\library.dat不存在" << endl;;
+		cout << "[警告]文件:config\\library.dat不存在" << endl;;
 	} else {
 		while (!inf_book.eof()) {
 			string str;
 			inf_book >> str;
-			string s[4];
+			string s[6];
 			for (int i = 0, j = 0; i < str.size(); i++) {
 				if (str[i] == ',') {
 					j++;
@@ -162,18 +195,19 @@ void readDataFromProperties() {
 				}
 			}
 			if (s[0] != "" && s[1] != "" && s[2] != "") {
-				book.push_back(Books(s[0], s[1], s[2], s[3][0] == 'f' ? false : true));
+				book.push_back(Books(s[0], s[1], s[2], s[3][0] == 'f' ? false : true, s[4][0] == 't' ? true : false, s[5]));
+				bookNum++;
 			}
 		}
 		L.setBooks(book);
 	}
 	if (!inf_reader) {
-		cout << "文件:config\\readers.dat不存在" << endl;
+		cout << "[警告]文件:config\\readers.dat不存在" << endl;
 	} else {
 		while (!inf_reader.eof()) {
 			string str;
 			inf_reader >> str;
-			string s[4];
+			string s[5];
 			for (int i = 0, j = 0; i < str.size(); i++) {
 				if (str[i] == ',') {
 					j++;
@@ -182,13 +216,17 @@ void readDataFromProperties() {
 				}
 			}
 			if (s[0] != "" && s[1] != "" && s[2] != "" ) {
-				readers.push_back(reader(s[0], s[1], s[2], s[3]));
+				readers.push_back(reader(s[0], s[1], s[2], s[3], s[4][0] == 't' ? true : false));
+				readerNum++;
 			}
 		}
 		R.setReaders(readers);
 	}
-
+	cout << "[提示]共读取书籍记录" << bookNum << "条" << ",";
+	cout << "读者记录" << readerNum << "条" << endl;
 	L.selectAll();
+	R.selectAll();
+	cout << "[提示]程序初始化完成！";
 	inf.close();
 	inf_book.close();
 	inf_reader.close();
@@ -196,7 +234,7 @@ void readDataFromProperties() {
 
 //一键保存数据
 void writeDataToProperties() {
-	cout << "开始写入" << endl;
+	cout << "[提示]自动保存..." << endl;
 	//获取内存中的数据
 	vector<Books> book = L.getBooks();
 	vector<reader> readers = R.getReaders();
@@ -218,7 +256,7 @@ void writeDataToProperties() {
 	//保存密码
 	if (password != "") {
 		//加密
-		outf_key << enCode(password.c_str());
+		outf_key << password.c_str();
 	}
 	outf_reader.close();
 	outf_book.close();
@@ -228,8 +266,7 @@ void writeDataToProperties() {
 string enCode(string key) {
 	string result;
 	string md(string key);
-	result=md(key);
-	//cout<<result<<endl;
+	result = md(key);
 	return result;
 }
 
@@ -244,22 +281,25 @@ string enCode(string key) {
 		3、处理各种特殊情况，比如进行添加用户前，先判断新增用户的数据是否合法
 **/
 void BookMsg() {
-	cout << "===============================" << endl;
-	cout << "1-查询所有图书" << endl;
-	cout << "2-新增图书" << endl;
-	cout << "3-删除图书" << endl;
-	cout << "4-修改图书" << endl;
-	cout << "5-查询图书" << endl;
-	cout << "6-一键保存" << endl;
-	cout << "===============================" << endl;
+	system("cls");
+	cout << "____________________________________________________" << endl;
+	cout << "||================================================||" << endl;
+	cout << "||\t\t    " << "1-查询所有图书" << "\t\t  ||" << endl;
+	cout << "||\t\t    " << "2-新增图书" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "3-删除图书" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "4-修改图书" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "5-查询图书" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "6-退出" << "\t\t\t  ||" << endl;
+	cout << "||================================================||" << endl;
+	cout << "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣" << endl;
 }
 
 void bookManagment() {
-	while(1){
+	while (1) {
 		BookMsg();
 		string name, item, id, flag;
-		int select;
-		cin >> select;
+		int select = input();
+		system("cls");
 		switch (select) {
 			//查询所有
 			case 1:
@@ -268,8 +308,8 @@ void bookManagment() {
 			case 2:
 				//添加功能
 			{
-				id = to_string(L.getTotal()+1);
-				int n=id.size();
+				id = to_string(L.getTotal() + 1);
+				int n = id.size();
 				for (int i = 0; i <= 4 - n; i++ ) {
 					id = "0" + id;
 				}
@@ -279,14 +319,17 @@ void bookManagment() {
 				cin >> item;
 				Books b(id, name, item, true);
 				L.add(&b);
+				writeDataToProperties();
 			}
 			break;
-	
+
 			case 3: {
+				L.selectAll();
 				cout << "请输入书号" << endl;
 				cin >> id;
 				if (L.remove(id)) {
 					cout << "删除成功" << endl;
+					writeDataToProperties();
 				} else {
 					cout << "不存在这本书,请重新查询" << endl;
 				}
@@ -295,9 +338,10 @@ void bookManagment() {
 			case 4:
 				//修改功能
 			{
+				L.selectAll();
 				cout << "请输入书号：" ;
 				cin >> id;
-				Books* book = (Books*)L.selectById(id);
+				Books *book = (Books *)L.selectById(id);
 				if (book == NULL) {
 					cout << "不存在这本书,请重新查询" << endl;
 				} else {
@@ -309,14 +353,16 @@ void bookManagment() {
 					cin >> flag;
 					Books b(id, name, item, flag == "Y" ? true : false);
 					L.modify(&b);
+					writeDataToProperties();
 				}
 			}
 			break;
 			case 5: {
+				L.selectAll();
 				cout << "请输入书号" << endl;
 				cin >> id;
-				Books* book = (Books*)L.selectById(id);
-				if (book ==NULL) {
+				Books *book = (Books *)L.selectById(id);
+				if (book == NULL) {
 					cout << "不存在这本书,请重新查询" << endl;
 				} else {
 					cout << book->toString();
@@ -324,9 +370,12 @@ void bookManagment() {
 			}
 			break;
 			case 6:
-				writeDataToProperties();
+				return;
 				break;
 		}
+		cout << "按任意键继续";
+		getchar();
+		getchar();
 	}
 }
 
@@ -338,9 +387,104 @@ void bookManagment() {
 		2、基础的增删改查(调用方法已封装在Readers类中);
 		3、处理各种特殊情况，比如进行添加用户前，先判断新增用户的数据是否合法
 **/
-void readerManagment() {
-
+void readerMsg() {
+	system("cls");
+	cout << "____________________________________________________" << endl;
+	cout << "||================================================||" << endl;
+	cout << "||\t\t    " << "1-查询所有读者" << "\t\t  ||" << endl;
+	cout << "||\t\t    " << "2-新增读者" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "3-删除读者" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "4-修改读者" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "5-查询读者" << "\t\t\t  ||" << endl;
+	cout << "||\t\t    " << "6-退出    " << "\t\t\t  ||" << endl;
+	cout << "||================================================||" << endl;
+	cout << "￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣￣" << endl;
 }
+
+void readerManagment() {
+	while (1) {
+		readerMsg();
+		string name, tel, id;
+		int select = input();
+		system("cls");
+		switch (select) {
+			//查询所有
+			case 1:
+				R.selectAll();
+				break;
+			case 2:
+				//添加功能
+			{
+				id = to_string(R.getTotal() + 1);
+				int n = id.size();
+				for (int i = 0; i <= 4 - n; i++ ) {
+					id = "0" + id;
+				}
+				cout << "请输入姓名:";
+				cin >> name;
+				cout << "请输入手机号码:";
+				cin >> tel;
+				reader r(id, name, tel, "");
+				R.add(&r);
+				writeDataToProperties();
+			}
+			break;
+
+			case 3: {
+				R.selectAll();
+				cout << "请输入学号" << endl;
+				cin >> id;
+				if (R.remove(id)) {
+					cout << "删除成功" << endl;
+				} else {
+					cout << "不存在此人,请重新查询" << endl;
+					writeDataToProperties();
+				}
+			}
+			break;
+			case 4:
+				//修改功能
+			{
+				R.selectAll();
+				cout << "请输入学号：" ;
+				cin >> id;
+				reader *r = (reader *)R.selectById(id);
+				if (r == NULL) {
+					cout << "不存在此人,请重新查询" << endl;
+				} else {
+					cout << "姓名：";
+					cin >> name;
+					cout << "手机号：";
+					cin >> tel;
+					reader reader(id, name, tel, r->getPassword());
+					R.modify(&reader);
+					writeDataToProperties();
+				}
+			}
+			break;
+			case 5: {
+				R.selectAll();
+				cout << "请输入学号" << endl;
+				cin >> id;
+				reader *r = (reader *)R.selectById(id);
+				if (r == NULL) {
+					cout << "不存在此人,请重新查询" << endl;
+				} else {
+					cout << r->toString();
+				}
+			}
+			break;
+			case 6:
+				return;
+				break;
+		}
+		cout << "按任意键继续";
+		getchar();
+		getchar();
+	}
+}
+
+
 
 //借阅登记模块
 void record(reader &user) {

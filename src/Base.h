@@ -8,9 +8,16 @@ class Base {
 	private:
 		string id;
 		string name;
+		bool del;
 	public:
 		Base();
-		Base(string id, string name): id(id), name(name) {
+		Base(string id, string name, bool del = false): id(id), name(name), del(del) {
+		}
+		void setDel(bool state) {
+			del = state;
+		}
+		bool getDel() {
+			return del;
 		}
 		string getName() {
 			return name;

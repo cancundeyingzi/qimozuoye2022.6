@@ -3,7 +3,8 @@
 reader::reader() {
 }
 
-reader::reader(string id, string name, string tel, string pwd): Base(id, name), tel(tel), password(pwd) {
+reader::reader(string id, string name, string tel, string pwd, bool del): Base(id, name, del), tel(tel),
+	password(pwd) {
 }
 
 string reader::getName() {
@@ -19,7 +20,8 @@ string reader::getTel() {
 }
 
 string reader::toString() {
-	return Base::toString() + this->tel + "," + this->password + "\n";
+	string d = Base::getDel() ? "true" : "false";
+	return Base::toString() + tel + "," + password + "," + d + "\n";
 }
 
 bool reader::check(string pwd) {
@@ -28,6 +30,14 @@ bool reader::check(string pwd) {
 
 string reader::getPassword() {
 	return password;
+}
+
+void reader::setDel(bool state) {
+	Base::setDel(state);
+}
+
+bool reader::getDel() {
+	return Base::getDel();
 }
 
 reader::~reader() {

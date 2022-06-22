@@ -27,13 +27,12 @@ CommandLine =
 Folders = cpp,h
 IncludeVersionInfo = 0
 SupportXPThemes = 0
-CompilerSet = 0
-CompilerSettings = 000000ea00000000001000000
+CompilerSet = 1
 UnitCount = 16
 UsePrecompiledHeader = 0
 PrecompiledHeader = 
-CompilerSetType = 0
-StaticLink = 0
+CompilerSetType = 1
+StaticLink = 1
 AddCharset = 1
 Encoding = AUTO
 ModelType = 1
@@ -240,40 +239,20 @@ BuildCmd =
 DetectEncoding = 1
 
 
-[CompilerSettings]
-cc_cmd_opt_abort_on_error = 
-cc_cmd_opt_ansi = 
-cc_cmd_opt_arch = 
-cc_cmd_opt_check_iso_conformance = 
-cc_cmd_opt_debug_info = on
-cc_cmd_opt_inhibit_all_warning = 
-cc_cmd_opt_instruction = 
-cc_cmd_opt_only_gen_asm_code = 
-cc_cmd_opt_optimize = 2
-cc_cmd_opt_pointer_size = 64
-cc_cmd_opt_profile_info = 
-cc_cmd_opt_std = 
-cc_cmd_opt_syntax_only = 
-cc_cmd_opt_traditional_cpp = 
-cc_cmd_opt_tune = 
-cc_cmd_opt_use_pipe = on
-cc_cmd_opt_verbose_asm = 
-cc_cmd_opt_warning_all = on
-cc_cmd_opt_warning_as_error = 
-cc_cmd_opt_warning_extra = on
-link_cmd_opt_link_objc = on
-link_cmd_opt_no_console = 
-link_cmd_opt_no_link_stdlib = on
-link_cmd_opt_strip_exe = on
-
-
 [Unit16]
 FileName = md5.cpp
 CompileCpp = 1
-Folder = 
+Folder = cpp
 Compile = 1
 Link = 1
 Priority = 1000
 OverrideBuildCmd = 0
 BuildCmd = 
 DetectEncoding = 1
+
+
+[CompilerSettings]
+cc_cmd_opt_debug_info = on
+cc_cmd_opt_use_pipe = on
+cc_cmd_opt_warning_all = on
+cc_cmd_opt_warning_extra = on

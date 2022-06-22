@@ -6,6 +6,8 @@ Library::Library() {
 //根据Id设置图书的借阅状态
 void Library::setFlag(string id, bool start) {
 	for (int i = 0; i < books.size(); i++) {
+		if (books[i].getDel())
+			continue;
 		if (id == books[i].getId()) {
 			books[i].setFlag(start);
 			return;
@@ -28,8 +30,11 @@ bool Library::add(Base *b) {
 //删除,已完成
 bool Library::remove(string id) {
 	for (int i = 0; i < books.size(); i++) {
+		if (books[i].getDel())
+			continue;
 		if (id.compare(this->books[i].getId()) == 0) {
-			books.erase(books.begin() + i );
+//			books.erase(books.begin() + i );
+			books[i].setDel(true);//逻辑删除
 			return true;
 		}
 	}
@@ -41,6 +46,8 @@ bool Library::modify(Base *b) {
 	Books *book = (Books *)b;
 	string id = book->getId();
 	for (int i = 0; i < books.size(); i++) {
+		if (books[i].getDel())
+			continue;
 		if (id == this->books[i].getId()) {
 			books[i] = *book;
 			return true;
@@ -53,6 +60,8 @@ bool Library::modify(Base *b) {
 Base *Library::selectById(string id) {
 	Books *book = NULL;
 	for (int i = 0; i < books.size(); i++) {
+		if (books[i].getDel())
+			continue;
 		if (id == this->books[i].getId()) {
 			book = &books[i];
 			break;
@@ -71,6 +80,9 @@ void Library::selectAll() {
 	}
 	printf("%-10s%-30s%-15s%10s\n", "书号", "书名", "类型", "是否被借阅");
 	for (int i = 0; i < books.size(); i++) {
+		//如果被标注逻辑删除则不显示
+		if (books[i].getDel())
+			continue;
 		printf("%-10s%-30s%-15s",  books[i].getId().c_str(), books[i].getName().c_str(),
 		       books[i].getItem().c_str() );
 		if (books[i].getFlag()) {

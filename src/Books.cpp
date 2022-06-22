@@ -3,7 +3,9 @@
 Books::Books() {
 }
 
-Books::Books(string id, string name, string item, bool flag): Base(id, name), item(item), flag(flag) {
+Books::Books(string id, string name, string item, bool flag, bool del, string readerId): Base(id, name, del),
+	item(item),
+	flag(flag), readerId(readerId) {
 }
 
 void Books::setFlag(bool flag) {
@@ -26,9 +28,26 @@ bool Books::getFlag() {
 	return flag;
 }
 
+void Books::setDel(bool state) {
+	Base::setDel(state);
+}
+
+bool Books::getDel() {
+	return Base::getDel();
+}
+
 string Books::toString() {
 	string f = flag ? "true" : "false";
-	return Base::toString() + item + "," + f + "\n";
+	string d = Base::getDel() ? "true" : "false";
+	return Base::toString() + item + "," + f + "," + d + "," + this->readerId + "\n";
+}
+
+void Books::setReaderId(string id) {
+	this->readerId = id;
+}
+
+string Books::getReaderId() {
+	return this->readerId;
 }
 
 Books::~Books() {
