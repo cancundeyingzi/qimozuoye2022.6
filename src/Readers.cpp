@@ -1,5 +1,14 @@
 #include "Readers.h"
 
+string Readers::buildId() {
+	string BID = to_string(readers.size() + 1);
+	int n = BID.size();
+	for (int i = 1; i <= 5 - n; i++) {
+		BID = "0" + BID;
+	}
+	return BID;
+}
+
 vector<reader> &Readers::getReaders() {
 	return this->readers;
 }
@@ -20,7 +29,8 @@ bool Readers::remove(string id) {
 			continue;
 		}
 		if (id == this->readers[i].getId()) {
-			readers.erase(readers.begin() + i );
+//			readers.erase(readers.begin() + i );
+			readers[i].setDel(true);
 			return true;
 		}
 	}

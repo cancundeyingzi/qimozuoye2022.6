@@ -1,52 +1,56 @@
 # Project: Library_system
-# Makefile created by Dev-C++ 5.15
+# Makefile created by Red Panda C++ 1.1.0
 
-CPP      = g++.exe -D__DEBUG__
-CC       = gcc.exe -D__DEBUG__
+CPP      = g++.exe
+CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o md5.o
-LINKOBJ  = main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o md5.o
-LIBS     = -L"D:/Dev-Cpp/TDM-GCC-64/lib" -L"D:/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/lib" -static-libgcc -m64 -g3
-INCS     = -I"D:/Dev-Cpp/TDM-GCC-64/include" -I"D:/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include"
-CXXINCS  = -I"D:/Dev-Cpp/TDM-GCC-64/include" -I"D:/Dev-Cpp/TDM-GCC-64/x86_64-w64-mingw32/include" -I"D:/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include" -I"D:/Dev-Cpp/TDM-GCC-64/lib/gcc/x86_64-w64-mingw32/9.2.0/include/c++"
+OBJ      = main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o mainSystem.o md5.o
+LINKOBJ  = main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o mainSystem.o md5.o
+CLEANOBJ  =  main.o Record.o Base.o Books.o Library.o Management.o Readers.o reader.o mainSystem.o md5.o Library_system.exe
+LIBS     =  -s -static
+INCS     =  
+CXXINCS  =  
 BIN      = Library_system.exe
-CXXFLAGS = $(CXXINCS) -Og -m64 -g3
-CFLAGS   = $(INCS) -Og -m64 -g3
-RM       = del /q
+CXXFLAGS = $(CXXINCS)  -O2 -pipe
+CFLAGS   = $(INCS)  -O2 -pipe
+RM       = del /q /f
 
 .PHONY: all all-before all-after clean clean-custom
 
 all: all-before $(BIN) all-after
 
 clean: clean-custom
-	${RM} $(OBJ) $(BIN)
+	${RM} $(CLEANOBJ) > NUL 2>&1
 
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-main.o: main.cpp
-	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+main.o: main.cpp Library.h Readers.h Base.h mainSystem.h Books.h reader.h Record.h Management.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/main.cpp" -o main.o $(CXXFLAGS) 
 
-Record.o: Record.cpp
-	$(CPP) -c Record.cpp -o Record.o $(CXXFLAGS)
+Record.o: Record.cpp Record.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/Record.cpp" -o Record.o $(CXXFLAGS) 
 
-Base.o: Base.cpp
-	$(CPP) -c Base.cpp -o Base.o $(CXXFLAGS)
+Base.o: Base.cpp Base.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/Base.cpp" -o Base.o $(CXXFLAGS) 
 
-Books.o: Books.cpp
-	$(CPP) -c Books.cpp -o Books.o $(CXXFLAGS)
+Books.o: Books.cpp Base.h Books.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/Books.cpp" -o Books.o $(CXXFLAGS) 
 
-Library.o: Library.cpp
-	$(CPP) -c Library.cpp -o Library.o $(CXXFLAGS)
+Library.o: Library.cpp Base.h Library.h Management.h Books.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/Library.cpp" -o Library.o $(CXXFLAGS) 
 
 Management.o: Management.cpp
-	$(CPP) -c Management.cpp -o Management.o $(CXXFLAGS)
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/Management.cpp" -o Management.o $(CXXFLAGS) 
 
-Readers.o: Readers.cpp
-	$(CPP) -c Readers.cpp -o Readers.o $(CXXFLAGS)
+Readers.o: Readers.cpp Readers.h reader.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/Readers.cpp" -o Readers.o $(CXXFLAGS) 
 
-reader.o: reader.cpp
-	$(CPP) -c reader.cpp -o reader.o $(CXXFLAGS)
+reader.o: reader.cpp reader.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/reader.cpp" -o reader.o $(CXXFLAGS) 
+
+mainSystem.o: mainSystem.cpp Library.h Readers.h Base.h mainSystem.h Books.h reader.h Record.h Management.h
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/mainSystem.cpp" -o mainSystem.o $(CXXFLAGS) 
 
 md5.o: md5.cpp
-	$(CPP) -c md5.cpp -o md5.o $(CXXFLAGS)
+	$(CPP) -c "C:/Users/ASUS/OneDrive - OneDrive/文档/WeChat Files/wxid_f79zgjs1vzlp22/FileStorage/MsgAttach/58ca3de4093342e07abb79805bbbb950/File/2022-06/最终版/src/md5.cpp" -o md5.o $(CXXFLAGS) 

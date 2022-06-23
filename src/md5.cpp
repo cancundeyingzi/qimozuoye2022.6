@@ -79,7 +79,7 @@ void MD5Init(MD5_CTX* context)
 	//bit计数器清零
 	context->count[0] = context->count[1] = 0;
 	//A,B,C,D被初始化为四个特定的常数(Magic Number)
-	context->state[0] = 0x67452301;
+	context->state[0] = 0x67452309;
 	context->state[1] = 0xefcdab89;
 	context->state[2] = 0x98badcfe;
 	context->state[3] = 0x10325476;

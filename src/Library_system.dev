@@ -1,232 +1,281 @@
 [Project]
-FileName=Library_system.dev
-Name=Library_system
-Type=1
-Ver=2
-ObjFiles=
-Includes=
-Libs=
-PrivateResource=
-ResourceIncludes=
-MakeIncludes=
-Compiler=
-CppCompiler=
-Linker=
-IsCpp=1
-Icon=
-ExeOutput=
-ObjectOutput=
-LogOutput=
-LogOutputEnabled=0
-OverrideOutput=0
-OverrideOutputName=
-HostApplication=
-UseCustomMakefile=0
-CustomMakefile=
-CommandLine=
-Folders=cpp,h
-IncludeVersionInfo=0
-SupportXPThemes=0
-CompilerSet=1
-CompilerSettings=000000ea00000000001000000
-UnitCount=18
+FileName = Library_system.dev
+Name = Library_system
+Type = 1
+Ver = 3
+ObjFiles = 
+Includes = 
+Libs = 
+PrivateResource = 
+ResourceIncludes = 
+MakeIncludes = 
+Compiler = 
+CppCompiler = 
+Linker = 
+IsCpp = 1
+Icon = 
+ExeOutput = 
+ObjectOutput = 
+LogOutput = 
+LogOutputEnabled = 0
+OverrideOutput = 0
+OverrideOutputName = 
+HostApplication = 
+UseCustomMakefile = 0
+CustomMakefile = 
+CommandLine = 
+Folders = cpp,h
+IncludeVersionInfo = 0
+SupportXPThemes = 0
+CompilerSet = 0
+UnitCount = 18
+UsePrecompiledHeader = 0
+PrecompiledHeader = 
+CompilerSetType = 0
+StaticLink = 1
+AddCharset = 1
+Encoding = AUTO
+ModelType = 1
+UseUTF8 = 0
+
 
 [VersionInfo]
-Major=1
-Minor=0
-Release=0
-Build=0
-LanguageID=1033
-CharsetID=1252
-CompanyName=
-FileVersion=1.0.0.0
-FileDescription=Developed using the Dev-C++ IDE
-InternalName=
-LegalCopyright=
-LegalTrademarks=
-OriginalFilename=
-ProductName=
-ProductVersion=1.0.0.0
-AutoIncBuildNr=0
-SyncProduct=1
+Major = 1
+Minor = 0
+Release = 0
+Build = 0
+LanguageID = 1033
+CharsetID = 1252
+CompanyName = 
+FileVersion = 1.0.0.0
+FileDescription = Developed using the Dev-C++ IDE
+InternalName = 
+LegalCopyright = 
+LegalTrademarks = 
+OriginalFilename = 
+ProductName = 
+ProductVersion = 1.0.0.0
+AutoIncBuildNr = 0
+SyncProduct = 1
+
 
 [Unit2]
-FileName=Library.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Library.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit12]
-FileName=Library.cpp
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-CompileCpp=1
+FileName = Library.cpp
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+CompileCpp = 1
+DetectEncoding = 1
+
 
 [Unit5]
-FileName=Books.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Books.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit3]
-FileName=main.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = main.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit1]
-FileName=Base.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Base.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit4]
-FileName=Readers.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Readers.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit6]
-FileName=reader.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = reader.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit7]
-FileName=Management.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Management.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit8]
-FileName=Record.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Record.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit9]
-FileName=Record.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Record.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit14]
-FileName=Readers.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Readers.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit15]
-FileName=reader.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = reader.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit10]
-FileName=Base.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Base.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit11]
-FileName=Books.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Books.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit13]
-FileName=Management.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = Management.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
 
-[Unit16]
-FileName=md5.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
 
 [Unit17]
-FileName=mainSystem.cpp
-CompileCpp=1
-Folder=cpp
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = mainSystem.h
+CompileCpp = 1
+Folder = h
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
 
 [Unit18]
-FileName=mainSystem.h
-CompileCpp=1
-Folder=h
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
+FileName = md5.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
 
+
+[Unit16]
+FileName = mainSystem.cpp
+CompileCpp = 1
+Folder = cpp
+Compile = 1
+Link = 1
+Priority = 1000
+OverrideBuildCmd = 0
+BuildCmd = 
+DetectEncoding = 1
+
+
+[CompilerSettings]
+cc_cmd_opt_optimize = 2
+cc_cmd_opt_use_pipe = on
+link_cmd_opt_strip_exe = on

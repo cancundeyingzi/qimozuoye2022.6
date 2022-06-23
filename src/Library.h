@@ -18,7 +18,7 @@ class Library : public Management {
 		bool add(Base *b);
 		//删除,已完成
 		bool remove(string id);
-		//修改,配合selectById使用,已完成
+		//更新,配合selectById使用,已完成
 		bool modify(Base *b);
 		//按Id查询 已完成
 		Base *selectById(string id);
@@ -26,6 +26,7 @@ class Library : public Management {
 		void selectAll();
 		//返回总数
 		int getTotal();
+		string buildId();
 		vector<Books> &getBooks();
 		~Library();
 };

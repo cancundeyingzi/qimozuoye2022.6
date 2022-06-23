@@ -17,9 +17,8 @@ class Readers: public Management {
 		bool modify(Base *b);
 		Base *selectById(string id);
 		void selectAll();
-
+		string buildId();
 		int getTotal();
-
 };
 
 #endif

@@ -3,6 +3,15 @@
 Library::Library() {
 }
 
+string Library::buildId() {
+	string BID = to_string(books.size() + 1);
+	int n = BID.size();
+	for (int i = 1; i <= 5 - n; i++) {
+		BID = "0" + BID;
+	}
+	return BID;
+}
+
 //根据Id设置图书的借阅状态
 void Library::setFlag(string id, bool start) {
 	for (int i = 0; i < books.size(); i++) {
@@ -30,7 +39,7 @@ bool Library::add(Base *b) {
 //删除,已完成
 bool Library::remove(string id) {
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i].getDel())
+		if (books[i].getDel() || !books[i].getFlag())
 			continue;
 		if (id.compare(this->books[i].getId()) == 0) {
 //			books.erase(books.begin() + i );
@@ -46,7 +55,7 @@ bool Library::modify(Base *b) {
 	Books *book = (Books *)b;
 	string id = book->getId();
 	for (int i = 0; i < books.size(); i++) {
-		if (books[i].getDel())
+		if (books[i].getDel() || !books[i].getFlag())
 			continue;
 		if (id == this->books[i].getId()) {
 			books[i] = *book;
